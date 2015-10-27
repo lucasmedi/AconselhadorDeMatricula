@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Página Inicial";
+}
+
+<div class="jumbotron">
+    <h1>Aconselhador de Matrículas</h1>
+    <p class="lead">O sistema tem o objetivo de auxiliar no planejamento das disciplinas a serem cursados no próximo semestre.</p>
+    <p>@Html.ActionLink("Vamos lá!", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary btn-lg" })</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Começando...</h2>
+        <p>É sua primeira vez aqui? Crie uma conta de deixe o Aconselhador de Matrícula fazer o trabalho por você!</p>
+        <p>@Html.ActionLink("Por aqui »", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Já possui uma conta?</h2>
+        <p>Então entre e veja como será seu próximo semestre! Esteja um passo mais próximo de se tornar um profissional!</p>
+        <p>@Html.ActionLink("Por aqui »", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Problemas ou dúvidas?</h2>
+        <p>Encontrou algum problema no site? Tem alguma dúvida sobre o sistema? Entre em contato com nossa equipe!</p>
+        <p>@Html.ActionLink("Por aqui »", "About", "Home", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })</p>
+    </div>
+</div>
