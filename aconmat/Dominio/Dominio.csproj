@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aconselhador\Disciplina.cs" />
+    <Compile Include="Aconselhador\Turma.cs" />
     <Compile Include="Enums\EnumDiaSemana.cs" />
     <Compile Include="Aconselhador\Aconselhador.cs" />
     <Compile Include="Modelos\Curso.cs" />
@@ -48,7 +49,6 @@
     <Compile Include="Enums\EnumHorario.cs" />
     <Compile Include="Aconselhador\Grade.cs" />
     <Compile Include="Aconselhador\Periodo.cs" />
-    <Compile Include="Aconselhador\Matricula.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modelos\Turma.cs" />
   </ItemGroup>

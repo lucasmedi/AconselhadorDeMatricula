@@ -6,6 +6,7 @@
         CD,
         FG,
         HI,
+        JK,
         LM,
         NP
     }
