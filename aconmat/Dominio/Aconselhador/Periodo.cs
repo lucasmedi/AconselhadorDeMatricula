@@ -4,7 +4,7 @@ namespace Dominio.Aconselhador
 {
     public class Periodo
     {
-        public EnumHorario Horario { get; set; }
-        public EnumDiaSemana DiaSemana { get; set; }
+        public Horario Horario { get; set; }
+        public DiaSemana DiaSemana { get; set; }
     }
 }

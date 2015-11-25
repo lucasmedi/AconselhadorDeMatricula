@@ -12,6 +12,8 @@ namespace Dominio.Aconselhador
         public int Creditos { get; set; }
         public int CargaHoraria { get; set; }
 
+        public int? MinimoCreditosCursados { get; set; }
+
         public List<Disciplina> Prerequisitos { get; set; }
         public List<Turma> Turmas { get; set; }
 

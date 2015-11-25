@@ -42,12 +42,14 @@
   <ItemGroup>
     <Compile Include="Aconselhador\Celula.cs" />
     <Compile Include="Aconselhador\Disciplina.cs" />
+    <Compile Include="Aconselhador\LeitorCSV.cs" />
     <Compile Include="Aconselhador\Turma.cs" />
-    <Compile Include="Enums\EnumDiaSemana.cs" />
+    <Compile Include="Enums\DiaSemana.cs" />
     <Compile Include="Aconselhador\Aconselhador.cs" />
+    <Compile Include="Enums\EnumHelper.cs" />
     <Compile Include="Modelos\Curso.cs" />
     <Compile Include="Modelos\Disciplina.cs" />
-    <Compile Include="Enums\EnumHorario.cs" />
+    <Compile Include="Enums\Horario.cs" />
     <Compile Include="Aconselhador\Matricula.cs" />
     <Compile Include="Aconselhador\Periodo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

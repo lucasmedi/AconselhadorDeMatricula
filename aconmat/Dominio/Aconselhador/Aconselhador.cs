@@ -6,15 +6,19 @@ namespace Dominio.Aconselhador
 {
     public class Aconselhador
     {
+        private int _creditosCursados;
+
         private IList<Disciplina> _pendentes;
         private IList<Periodo> _restricoes;
 
         private Dictionary<Disciplina, int> ranking;
 
-        public Aconselhador(IList<Disciplina> pendentes, IList<Periodo> restricoes)
+        public Aconselhador(IList<Disciplina> pendentes, IList<Periodo> restricoes, int creditosCursados)
         {
             _pendentes = pendentes;
             _restricoes = restricoes;
+
+            _creditosCursados = creditosCursados;
 
             ranking = new Dictionary<Disciplina, int>();
         }
@@ -72,6 +76,12 @@ namespace Dominio.Aconselhador
                 {
                     ranking.Remove(item);
                 }
+            }
+
+            // Remove com pré-requisito
+            foreach (var item in _pendentes.Where(o => o.MinimoCreditosCursados.HasValue))
+            {
+                ranking.Remove(item);
             }
 
             ranking = ranking.OrderByDescending(o => o.Value).ToDictionary(pair => pair.Key, pair => pair.Value);

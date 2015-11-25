@@ -25,7 +25,7 @@
 5;4635B-04;Gerência de Redes de Computadores;60;4635A;168-2NP4NP
 5;4641F-04;Programação de Software Aplicado;60;4641E;168-2LM4LM,179-2NP4NP
 6;2540L-04;Empreendimentos Empresariais;60;2547W;168-4LMNP
-6;4613Y-08;Disciplina Eletiva;120;;
+#6;4613Y-08;Disciplina Eletiva;120;;
 6;4633C-02;Tópicos de Gerência de Proj. de Software;30;4633B;168-3LM
 6;4633I-02;Tópicos Espec. em Engenharia de Software;30;4633A;168-5LM
 6;4634D-02;Laboratório de Banco de Dados II;30;4634C;168-2NP

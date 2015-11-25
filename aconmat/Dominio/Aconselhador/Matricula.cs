@@ -13,13 +13,20 @@ namespace Dominio.Aconselhador
 
         public Matricula()
         {
-            qtdCreditos = 0;
-            grade = new Celula[6, 7];
-            normais = new List<Disciplina>();
-            especiais = new List<Disciplina>();
+            Inicializa();
         }
 
         public Matricula(List<Periodo> bloqueados)
+        {
+            Inicializa();
+
+            foreach (var periodo in bloqueados)
+            {
+                grade[(int)periodo.DiaSemana - 2, (int)periodo.Horario - 1] = new Celula();
+            }
+        }
+
+        private void Inicializa()
         {
             qtdCreditos = 0;
             grade = new Celula[6, 7];
@@ -62,6 +69,7 @@ namespace Dominio.Aconselhador
                     adicionouPeriodo = true;
                     grade[(int)periodo.DiaSemana - 2, (int)periodo.Horario - 1] = new Celula()
                     {
+                        Livre = false,
                         CodCred = disciplina.CodCred,
                         Turma = turma.Numero
                     };
