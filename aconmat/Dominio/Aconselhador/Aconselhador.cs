@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Dominio.Aconselhador
@@ -18,7 +19,17 @@ namespace Dominio.Aconselhador
             ranking = new Dictionary<Disciplina, int>();
         }
 
-        public Grade GetMatricula()
+        public Matricula GetMatricula()
+        {
+            GeraRanking();
+
+            if (ranking.Count == 0)
+                throw new Exception("Não há disciplinas disponíveis para montar a grade de matrícula!");
+
+            return GeraGrade();
+        }
+
+        private void GeraRanking()
         {
             foreach (var disciplina in _pendentes)
             {
@@ -35,7 +46,7 @@ namespace Dominio.Aconselhador
                 }
             }
 
-            // Por número de prerequisitos a frente
+            // Por número de pré-requisitos à frente
             var rankingVinculo = new Dictionary<Disciplina, int>();
             foreach (var disciplina in _pendentes)
             {
@@ -64,8 +75,33 @@ namespace Dominio.Aconselhador
             }
 
             ranking = ranking.OrderByDescending(o => o.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
 
-            return new Grade();
+        private Matricula GeraGrade()
+        {
+            var grade = new Matricula();
+
+            var fila = new Queue<Disciplina>();
+            var continua = true;
+
+            foreach (var disciplina in ranking.Keys.ToList())
+            {
+                fila.Enqueue(disciplina);
+            }
+
+            do
+            {
+                if (fila.Any())
+                {
+                    grade.AdicionarDisciplina(fila.Dequeue());
+                }
+                else
+                {
+                    continua = false;
+                }
+            } while (continua);
+
+            return grade;
         }
 
         private void GetVinculados(List<Disciplina> vinculadas, string codCred)

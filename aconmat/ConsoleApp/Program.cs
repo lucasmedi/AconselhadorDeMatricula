@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Dominio.Aconselhador;
 using Dominio.Enums;
 
@@ -11,9 +13,58 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            var filePath = @"C:\Projetos\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes.csv";
+
+            var disciplinasPendentes = CarregaDisciplinasPendentes(filePath);
+
+            var aconselhador = new Aconselhador(disciplinasPendentes, null);
+            var matricula = aconselhador.GetMatricula();
+            var grade = matricula.GetGrade();
+
+            for (int i = 0; i < grade.GetLength(1); i++)
+            {
+                var str = new StringBuilder();
+                for (int j = 0; j < grade.GetLength(0); j++)
+                {
+                    if (grade.GetValue(j, i) != null)
+                    {
+                        str.Append((grade.GetValue(j, i) as Celula).CodCred + " | ");
+                    }
+                }
+
+                if (str.Length > 0)
+                {
+                    Console.WriteLine(GetEnumDescription((EnumHorario)i + 1) + " | " + str.ToString());
+                }
+            }
+
+            Console.WriteLine();
+
+            foreach (var item in matricula.GetDisciplinas())
+            {
+                Console.WriteLine(string.Format("{0}-{1:00} - {2}", item.CodCred, item.Creditos, item.Nome));
+            }
+
+            Console.ReadKey();
+        }
+
+        public static string GetEnumDescription(Enum value)
+        {
+            var fi = value.GetType().GetField(value.ToString());
+
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes != null && attributes.Length > 0)
+                return attributes[0].Description;
+
+            return value.ToString();
+        }
+
+        private static List<Disciplina> CarregaDisciplinasPendentes(string filePath)
+        {
             var disciplinasPendentes = new List<Disciplina>();
 
-            var reader = new StreamReader(@"C:\Projetos\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes.csv");
+            var reader = new StreamReader(filePath);
 
             while (!reader.EndOfStream)
             {
@@ -61,11 +112,7 @@ namespace ConsoleApp
                 disciplinasPendentes.Add(disciplina);
             }
 
-            var aconselhador = new Aconselhador(disciplinasPendentes, null);
-
-            aconselhador.GetMatricula();
-
-            Console.ReadKey();
+            return disciplinasPendentes;
         }
 
         private static List<Periodo> identificaPeriodos(string p)
