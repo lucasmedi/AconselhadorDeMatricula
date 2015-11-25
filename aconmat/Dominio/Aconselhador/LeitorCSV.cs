@@ -39,17 +39,17 @@ namespace Dominio.Aconselhador
                 disciplina.Nome = columns[2];
                 disciplina.CargaHoraria = int.Parse(columns[3]);
 
-                if (!string.IsNullOrEmpty(columns[4]))
+                if (!string.IsNullOrEmpty(columns[4 ]))
                 {
-                    var dep = columns[4].Split(',');
-                    for (int i = 0; i < dep.Length; i++)
+                    var dependencias = columns[4].Split(',');
+                    for (int i = 0; i < dependencias.Length; i++)
                     {
-                        if (dep[i].StartsWith("CRED"))
+                        if (dependencias[i].StartsWith("CRED"))
                         {
-                            disciplina.MinimoCreditosCursados = int.Parse(dep[i].Remove(0, 4));
+                            disciplina.MinimoCreditosCursados = int.Parse(dependencias[i].Remove(0, 4));
                         }
 
-                        var discRequisito = disciplinasPendentes.FirstOrDefault(o => o.CodCred == dep[i]);
+                        var discRequisito = disciplinasPendentes.FirstOrDefault(o => o.CodCred == dependencias[i]);
                         if (discRequisito != null)
                         {
                             disciplina.Prerequisitos.Add(discRequisito);

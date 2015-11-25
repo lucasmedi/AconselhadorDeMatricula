@@ -7,6 +7,7 @@ namespace Dominio.Aconselhador
     public class Aconselhador
     {
         private int _creditosCursados;
+        private int _pontuacao;
 
         private IList<Disciplina> _pendentes;
         private IList<Periodo> _restricoes;
@@ -15,8 +16,9 @@ namespace Dominio.Aconselhador
 
         public Aconselhador(IList<Disciplina> pendentes, IList<Periodo> restricoes, int creditosCursados)
         {
+            _pontuacao = 100;
             _pendentes = pendentes;
-            _restricoes = restricoes;
+            _restricoes = restricoes == null ? new List<Periodo>() : restricoes;
 
             _creditosCursados = creditosCursados;
 
@@ -37,7 +39,7 @@ namespace Dominio.Aconselhador
         {
             foreach (var disciplina in _pendentes)
             {
-                ranking.Add(disciplina, 100);
+                ranking.Add(disciplina, _pontuacao);
             }
 
             // Por nível
@@ -79,7 +81,7 @@ namespace Dominio.Aconselhador
             }
 
             // Remove com pré-requisito
-            foreach (var item in _pendentes.Where(o => o.MinimoCreditosCursados.HasValue))
+            foreach (var item in _pendentes.Where(o => o.MinimoCreditosCursados.HasValue && o.MinimoCreditosCursados <= _creditosCursados))
             {
                 ranking.Remove(item);
             }
@@ -90,6 +92,7 @@ namespace Dominio.Aconselhador
         private Matricula GeraGrade()
         {
             var grade = new Matricula();
+            grade.PreencherRestricoes(_restricoes);
 
             var fila = new Queue<Disciplina>();
             var continua = true;

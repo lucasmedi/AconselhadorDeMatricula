@@ -2,6 +2,7 @@
 using System.Text;
 using Dominio.Aconselhador;
 using Dominio.Enums;
+using System.Collections.Generic;
 
 namespace ConsoleApp
 {
@@ -9,12 +10,20 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            var filePath = @"C:\Projetos\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes.csv";
+            var filePath = @"C:\Users\giovanni-carlos\Documents\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes.csv";
 
             var leitor = new LeitorCSV(filePath);
             var disciplinasPendentes = leitor.CarregaDisciplinasPendentes();
 
-            var aconselhador = new Aconselhador(disciplinasPendentes, null, 0);
+
+            IList<Periodo> restricoes = new List<Periodo>();
+
+            restricoes.Add(new Periodo(Horario.LM, DiaSemana.Segunda));
+            restricoes.Add(new Periodo(Horario.LM, DiaSemana.Terca));
+            restricoes.Add(new Periodo(Horario.LM, DiaSemana.Quarta));
+            restricoes.Add(new Periodo(Horario.LM, DiaSemana.Quinta));
+
+            var aconselhador = new Aconselhador(disciplinasPendentes, restricoes, 0);
             var matricula = aconselhador.GetMatricula();
             var grade = matricula.GetGrade();
 
