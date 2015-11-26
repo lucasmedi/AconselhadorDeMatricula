@@ -1,0 +1,92 @@
+﻿@model Web.Models.SugerirViewModel
+
+@{
+    ViewBag.Title = "Sugerir Matrícula";
+}
+
+<h2>Sugerir Matrícula</h2>
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h4>Informe suas restrições de horário, se houver.</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(o => o.Restricoes, new { @class = "col-md-2 control-label" })
+            @Html.TextBoxFor(o => o.Restricoes, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Sugerir</button>
+            </div>
+        </div>
+    }
+</div>
+
+<br />
+<hr />
+<br />
+
+<div class="container">
+    @if (Model.Matricula != null)
+    {
+        var grade = Model.Matricula.GetGrade();
+        var escreveLinha = false;
+        var escreveCabecalho = true;
+
+        <h3>
+            Grade de Disciplinas
+        </h3>
+        <table class="table">
+            @for (int i = 0; i < grade.GetLength(1); i++)
+            {
+                if (escreveCabecalho)
+                {
+                    <thead>
+                        <tr>
+                            <th>Segunda</th>
+                            <th>Terça</th>
+                            <th>Quarta</th>
+                            <th>Quinta</th>
+                            <th>Sexta</th>
+                            <th>Horário</th>
+                        </tr>
+                    </thead>
+                    escreveCabecalho = false;
+                }
+
+                <tr>
+                    @for (int j = 0; j < grade.GetLength(0); j++)
+                    {
+                        var val = grade.GetValue(j, i) as Dominio.Aconselhador.Celula;
+                        if (val != null && !val.Bloqueado)
+                        {
+                            <td>@(val.Bloqueado ? "Livre" : val.CodCred)</td>
+                            escreveLinha = true;
+                        }
+                    }
+
+                    @if (escreveLinha)
+                    {
+                        <th>@Dominio.Enums.EnumHelper.GetEnumDescription((Dominio.Enums.Horario)i + 1)</th>
+                        escreveLinha = false;
+                    }
+                </tr>
+            }
+        </table>
+
+        <br />
+
+        <h3>
+            Relação de Disciplinas
+        </h3>
+        <ul class="list-group">
+            @foreach (var item in Model.Matricula.GetDisciplinas())
+            {
+                <li class="list-group-item">@string.Format("{0}-{1:00} - {2}", item.CodCred, item.Creditos, item.Nome)</li>
+            }
+        </ul>
+    }
+</div>

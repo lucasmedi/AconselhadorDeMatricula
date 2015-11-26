@@ -1,0 +1,46 @@
+1;2547W-04;Introducao à Gestão Empresarial;60;;128-2NP4NP
+1;4115H-04;Cálculo A;60;;168-3NP5NP,178-3LM5LM
+1;4115L-02;Matemática Discreta (SI);30;;168-6NP
+1;4631A-04;Introdução à Sistemas de Informação;60;;168-3LM5LM
+1;4641A-06;Algoritmos e Programação I;90;;168-2LM4LM6LM
+2;41238-04;Métodos Estatísticos;60;4115H;168-3LM5LM
+2;4631B-02;Teoria da Computação;30;4115L;168-6NP
+2;4632A-04;Organização e Arquitet. de Computadores;60;4631A;168-3LM5LM
+2;4641B-06;Algoritmos e Programação II;90;4641A;168-2LM4LM6LM,178-2NP4NP6NP
+2;4642A-04;Lógica para Computação;60;;168-3LM5LM
+3;4632B-04;Sistemas Operacionais (Si);60;4632A,4641B;168-3LM5LM
+3;4633A-04;Modelagem de Software;60;4641B;168-2NP4NP
+3;4634A-02;Laboratório de Banco de Dados I;30;4115L;168-6NP,178-6LM
+3;4641C-06;Algoritmos e Programação III;90;4641B;168-2LM4LM6LM,178-2NP4NP6NP,268-2LM4LM6LM
+3;4643A-04;Avaliação de Desempenho de Sistemas;60;4641A,41238;168-3LM5LM,178-3NP5NP
+4;4633F-04;Qualidade de Produto de Software;60;4633A,41238;168-2NP4NP
+4;4633H-02;Projeto de Interfaces;30;4633A;168-6NP
+4;4634B-04;Modelagem Conceit. e Proj. de Banco Dados;60;4634A;168-2LM4LM
+4;4635A-04;Fundamentos de Redes de Computadores;60;4641B;168-3LM5LM,178-3NP5NP,268-2LM4LM
+4;4635D-02;Sistemas Distribuídos;30;4632B;168-6LM
+4;4641E-04;Técnicas de Programação;60;4641C,4634B,4633A;168-3NP5NP,178-3LM5LM
+5;4632C-04;Inteligência Artificial (Si);60;4642A,4641C;168-3NP5NP
+5;4633B-04;Gerência de Projetos de Software;60;4633A;168-6LMNP
+5;4634C-04;Sistemas de Gerenciamento de Banco Dados;60;4641C,4634B;168-3LM5LM
+5;4635B-04;Gerência de Redes de Computadores;60;4635A;168-2NP4NP
+5;4641F-04;Programação de Software Aplicado;60;4641E;168-2LM4LM,179-2NP4NP
+6;2540L-04;Empreendimentos Empresariais;60;2547W;168-4LMNP
+#6;4613Y-08;Disciplina Eletiva;120;;
+6;4633C-02;Tópicos de Gerência de Proj. de Software;30;4633B;168-3LM
+6;4633I-02;Tópicos Espec. em Engenharia de Software;30;4633A;168-5LM
+6;4634D-02;Laboratório de Banco de Dados II;30;4634C;168-2NP
+6;4635E-02;Gerência de Infraestrutura de TI;30;4635B;168-2LM
+6;4636A-04;Teoria Geral de Sistemas;60;;168-3NP5NP
+7;13397-02;Psicologia e Gestão de Pessoas em TI;30;;168-5NP
+7;15091-04;Ética e Filosofia da Ciência;60;CRED60;128-6LMNP,168-6LMNP
+7;24135-02;Legislação em Informática;30;CRED60;168-3NP
+7;4631I-02;Prática Profissional (SI) 360 Horas;360;CRED80;
+7;4633D-04;Desenvolvimento de Sistemas;60;4634B,4641F,4633B;128-3NP5NP,168-3LM5LM
+7;4633E-04;Qualidade de Processo de Software;60;4633F;168-2NP4NP
+7;4634E-04;Aspectos Avancados de Banco de Dados;60;4634C;168-2LM4LM
+7;4641I-04;Trabalho de Conclusão I;60;CRED100;
+8;11521-04;Humanismo e Cultura Religiosa;60;CRED60;168-2NP4NP
+8;254AU-04;Governança Estratégica em TI;60;2540L;168-6LMNP
+8;4633G-04;Auditoria e Seguranca de Software;60;CRED80;168-2LM4LM
+8;4635C-04;Sistemas de Informação Integrados;60;4636A;168-3NP5NP
+8;4641J-04;Trabalho de Conclusão II;60;4641I;

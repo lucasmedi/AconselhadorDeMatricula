@@ -1,11 +1,16 @@
-﻿@{
+﻿@model Dominio.Modelos.Aluno
+
+@{
     ViewBag.Title = "Página Inicial";
 }
 
+@Html.AntiForgeryToken()
+
 <div class="row">
-    <h2>Seleção de Matrícula - Visão do Aluno</h2>
+    <h2>Seleção de Matrícula</h2>
+    <h3>Aluno: @Model.Nome</h3>
 </div>
 
 <div class="row">
-    <input 
+    @Html.ActionLink("Sugerir Matrícula", "SugerirMatricula")
 </div>
