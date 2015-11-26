@@ -39,7 +39,7 @@ namespace Dominio.Aconselhador
                 disciplina.Nome = columns[2];
                 disciplina.CargaHoraria = int.Parse(columns[3]);
 
-                if (!string.IsNullOrEmpty(columns[4 ]))
+                if (!string.IsNullOrEmpty(columns[4]))
                 {
                     var dependencias = columns[4].Split(',');
                     for (int i = 0; i < dependencias.Length; i++)

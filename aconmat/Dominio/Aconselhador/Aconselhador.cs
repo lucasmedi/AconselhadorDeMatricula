@@ -18,7 +18,7 @@ namespace Dominio.Aconselhador
         {
             _pontuacao = 100;
             _pendentes = pendentes;
-            _restricoes = restricoes == null ? new List<Periodo>() : restricoes;
+            _restricoes = restricoes ?? new List<Periodo>();
 
             _creditosCursados = creditosCursados;
 
@@ -81,7 +81,7 @@ namespace Dominio.Aconselhador
             }
 
             // Remove com pré-requisito
-            foreach (var item in _pendentes.Where(o => o.MinimoCreditosCursados.HasValue && o.MinimoCreditosCursados <= _creditosCursados))
+            foreach (var item in _pendentes.Where(o => o.MinimoCreditosCursados.HasValue && o.MinimoCreditosCursados > _creditosCursados))
             {
                 ranking.Remove(item);
             }
@@ -91,8 +91,7 @@ namespace Dominio.Aconselhador
 
         private Matricula GeraGrade()
         {
-            var grade = new Matricula();
-            grade.PreencherRestricoes(_restricoes);
+            var grade = new Matricula(_restricoes);
 
             var fila = new Queue<Disciplina>();
             var continua = true;

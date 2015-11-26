@@ -49,9 +49,9 @@ namespace Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "E-mail")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [StringLength(9, ErrorMessage = "A {0} deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
+        [Display(Name = "Matricula")]
+        public string Matricula { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +64,11 @@ namespace Web.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [StringLength(9, ErrorMessage = "A {0} deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
+        [Display(Name = "Matrícula")]
+        public string Matricula { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "E-mail")]

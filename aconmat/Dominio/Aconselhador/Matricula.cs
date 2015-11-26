@@ -16,15 +16,12 @@ namespace Dominio.Aconselhador
             Inicializa();
         }
 
-        //public Matricula(List<Periodo> bloqueados)
-        //{
-        //    Inicializa();
+        public Matricula(IList<Periodo> bloqueados)
+        {
+            Inicializa();
 
-        //    foreach (var periodo in bloqueados)
-        //    {
-        //        grade[(int)periodo.DiaSemana - 2, (int)periodo.Horario - 1] = new Celula();
-        //    }
-        //}
+            PreencherRestricoes(bloqueados);
+        }
 
         private void Inicializa()
         {
@@ -34,15 +31,13 @@ namespace Dominio.Aconselhador
             especiais = new List<Disciplina>();
         }
 
-        public void PreencherRestricoes(IList<Periodo> restricoes)
+        public void PreencherRestricoes(IList<Periodo> bloqueados)
         {
-            foreach (var periodo in restricoes)
+            foreach (var periodo in bloqueados)
             {
                 grade[(int)periodo.DiaSemana - 2, (int)periodo.Horario - 1] = new Celula()
                 {
-                    Livre = false,
-                    CodCred = "",
-                    Turma = 0
+                    Bloqueado = true,
                 };
             }
         }
@@ -82,7 +77,7 @@ namespace Dominio.Aconselhador
                     adicionouPeriodo = true;
                     grade[(int)periodo.DiaSemana - 2, (int)periodo.Horario - 1] = new Celula()
                     {
-                        Livre = false,
+                        Bloqueado = false,
                         CodCred = disciplina.CodCred,
                         Turma = turma.Numero
                     };

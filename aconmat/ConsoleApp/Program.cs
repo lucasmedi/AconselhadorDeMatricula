@@ -10,20 +10,19 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            var filePath = @"C:\Users\giovanni-carlos\Documents\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes.csv";
+            //var filePath = @"C:\Projetos\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes.csv";
+            var filePath = @"C:\Projetos\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes2.csv";
 
             var leitor = new LeitorCSV(filePath);
             var disciplinasPendentes = leitor.CarregaDisciplinasPendentes();
 
-
-            IList<Periodo> restricoes = new List<Periodo>();
-
+            var restricoes = new List<Periodo>();
             restricoes.Add(new Periodo(Horario.LM, DiaSemana.Segunda));
             restricoes.Add(new Periodo(Horario.LM, DiaSemana.Terca));
             restricoes.Add(new Periodo(Horario.LM, DiaSemana.Quarta));
             restricoes.Add(new Periodo(Horario.LM, DiaSemana.Quinta));
 
-            var aconselhador = new Aconselhador(disciplinasPendentes, restricoes, 0);
+            var aconselhador = new Aconselhador(disciplinasPendentes, restricoes, 80);
             var matricula = aconselhador.GetMatricula();
             var grade = matricula.GetGrade();
 
@@ -33,7 +32,7 @@ namespace ConsoleApp
                 for (int j = 0; j < grade.GetLength(0); j++)
                 {
                     var val = grade.GetValue(j, i) as Celula;
-                    if (val != null && !val.Livre)
+                    if (val != null && !val.Bloqueado)
                     {
                         str.Append(val.CodCred + " | ");
                     }
