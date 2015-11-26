@@ -1,0 +1,26 @@
+﻿@model Web.Models.AlunoViewModel
+
+@{
+    ViewBag.Title = "VerMatricula";
+}
+
+<div class="row">
+    <h2>Visualizar Matrícula</h2>
+    <h3>@string.Format("{0} - {1}", Model.GetAluno().Matricula, Model.GetAluno().Nome)</h3>
+</div>
+
+<hr />
+
+<div class="row">
+    <p>Ações: </p>
+    @Html.ActionLink("Voltar", "Index", "Coordenador", new { @class = "btn btn-default" })
+</div>
+
+<hr />
+
+<div class="row">
+    @if (Model.TemGrade)
+    {
+        Html.RenderPartial("_GradePartial", Model.GetGrade());
+    }
+</div>

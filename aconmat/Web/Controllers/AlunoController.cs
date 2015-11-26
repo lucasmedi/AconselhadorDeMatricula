@@ -14,11 +14,11 @@ namespace Web.Controllers
         // GET: Aluno
         public ActionResult Index()
         {
-            var aluno = ctx.Alunos.ToList().FirstOrDefault(o => o.Matricula == User.Identity.Name);
-            if (aluno.IsCoordenador)
+            var usuario = ctx.Alunos.ToList().FirstOrDefault(o => o.Matricula == User.Identity.Name);
+            if (usuario.IsCoordenador)
                 return RedirectToAction("Index", "Coordenador");
 
-            return View(new AlunoViewModel(aluno));
+            return View(new AlunoViewModel(usuario));
         }
 
         public ActionResult SugerirMatricula()

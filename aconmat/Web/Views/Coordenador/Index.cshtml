@@ -1,16 +1,41 @@
-﻿@{
+﻿@model Web.Models.CoordenadorViewModel
+
+@{
     ViewBag.Title = "Página Inicial";
 }
 
 <div class="row">
-    <h2>Seleção de Matrícula - Visão do Coordenador</h2>
+    <h2>Visão do Coordenador</h2>
+    <h3>@Model.Usuario.GetAluno().Nome</h3>
 </div>
 
+<hr />
+
 <div class="row">
-    <label for="aluno">Selecione o aluno</label>
-    <select id="aluno">
-        <option value="1">Aluno 1</option>
-        <option value="2">Aluno 2</option>
-        <option value="3">Aluno 3</option>
-    </select>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Matrícula</th>
+                <th>Nome</th>
+                <th>Tem matrícula?</th>
+            </tr>
+        </thead>
+        @foreach (var aluno in Model.Alunos)
+        {
+            <tr>
+                <td>@aluno.GetAluno().Matricula</td>
+                <td>@aluno.GetAluno().Nome</td>
+                <td>
+                    @if (aluno.TemGrade)
+                    {
+                        <p>Sim - @Html.ActionLink("ver matricula", "VerMatricula", new { matricula = aluno.GetAluno().Matricula })</p>
+                    }
+                    else
+                    {
+                        <p>Não</p>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
 </div>
