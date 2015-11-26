@@ -28,5 +28,9 @@ namespace Dominio.Persistencia
         public virtual DbSet<Aluno> Alunos { get; set; }
 
         public virtual DbSet<GradeMatricula> Matriculas { get; set; }
+
+        public virtual DbSet<Cadeira> Cadeiras { get; set; }
+
+        public virtual DbSet<Periodo> Periodos { get; set; }
     }
 }

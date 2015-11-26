@@ -15,10 +15,17 @@
 
 <div class="row">
     <p>Ações: </p>
-    @Html.ActionLink("Sugerir Matrícula", "SugerirMatricula", null, new { @class = "btn btn-default" })
-    @if (Model.TemGrade)
+    @if (!Model.TemGrade)
     {
-        @Html.ActionLink("Excluir Sugestão", "ExcluirSugestao", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Sugerir Matrícula", "SugerirMatricula", null, new { @class = "btn btn-default" })
+    }
+    else
+    {
+        using (Html.BeginForm("ExcluirSugestao", "Aluno"))
+        {
+            Html.AntiForgeryToken();
+            <button type="submit" class="btn btn-default">Excluir Sugestão</button>
+        }
     }
 </div>
 

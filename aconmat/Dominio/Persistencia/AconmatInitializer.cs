@@ -4,7 +4,7 @@ using Dominio.Modelos;
 
 namespace Dominio.Persistencia
 {
-    public class AconmatInitializer : DropCreateDatabaseIfModelChanges<AconmatContext>
+    public class AconmatInitializer : DropCreateDatabaseAlways<AconmatContext>
     {
         protected override void Seed(AconmatContext context)
         {

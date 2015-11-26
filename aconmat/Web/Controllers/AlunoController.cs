@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Dominio.Modelos;
 using Dominio.Persistencia;
@@ -29,7 +30,12 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SugerirMatricula(SugerirViewModel viewModel)
         {
-            var periodos = Dominio.Aconselhador.Periodo.IdentificaPeriodos(viewModel.Restricoes.Split(','));
+            var periodos = new List<Dominio.Aconselhador.Periodo>();
+            if (!string.IsNullOrEmpty(viewModel.Restricoes))
+            {
+                periodos = Dominio.Aconselhador.Periodo.IdentificaPeriodos(viewModel.Restricoes.Split(','));
+            }
+
             var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name, periodos);
             viewModel.Matricula = aconselhador.GetMatricula();
 
@@ -39,7 +45,13 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SalvarSugestao(SugerirViewModel viewModel)
         {
-            var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name);
+            var periodos = new List<Dominio.Aconselhador.Periodo>();
+            if (!string.IsNullOrEmpty(viewModel.Restricoes))
+            {
+                periodos = Dominio.Aconselhador.Periodo.IdentificaPeriodos(viewModel.Restricoes.Split(','));
+            }
+
+            var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name, periodos);
             var matricula = aconselhador.GetMatricula();
 
             var aluno = ctx.Alunos.FirstOrDefault(o => o.Matricula == User.Identity.Name);
@@ -75,6 +87,27 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Aluno");
         }
 
-        
+        [HttpPost]
+        public ActionResult ExcluirSugestao(SugerirViewModel viewModel)
+        {
+            var usuario = ctx.Alunos.ToList().FirstOrDefault(o => o.Matricula == User.Identity.Name);
+            if (usuario != null)
+            {
+                using (var c = ctx.Database.BeginTransaction())
+                {
+                    foreach (var item in usuario.Grade.Disciplinas)
+                    {
+                        ctx.Periodos.RemoveRange(item.Periodos);
+                    }
+                    ctx.Cadeiras.RemoveRange(usuario.Grade.Disciplinas);
+                    ctx.Matriculas.Remove(usuario.Grade);
+                    usuario.Grade = null;
+                    ctx.SaveChanges();
+                    c.Commit();
+                }
+            }
+
+            return RedirectToAction("Index", "Aluno");
+        }
     }
 }
