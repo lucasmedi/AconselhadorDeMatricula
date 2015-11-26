@@ -13,7 +13,7 @@ namespace Dominio.Persistencia
         // If you wish to target a different database and/or database provider, modify the 'AconmatContext' 
         // connection string in the application configuration file.
         public AconmatContext()
-            : base("name=AconmatContext")
+            : base("name=DefaultConnection")
         {
         }
 
