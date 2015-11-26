@@ -7,5 +7,7 @@
         public string Nome { get; set; }
 
         public bool IsCoordenador { get; set; }
+
+        public virtual GradeMatricula Grade { get; set; }
     }
 }

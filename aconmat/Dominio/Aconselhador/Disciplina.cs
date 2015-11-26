@@ -19,6 +19,8 @@ namespace Dominio.Aconselhador
         public List<Disciplina> Prerequisitos { get; set; }
         public List<Turma> Turmas { get; set; }
 
+        public Turma TurmaSelecionada { get; set; }
+
         public Disciplina()
         {
             Prerequisitos = new List<Disciplina>();

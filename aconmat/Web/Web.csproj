@@ -177,6 +177,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AconselhadorModel.cs" />
+    <Compile Include="Models\AlunoViewModel.cs" />
+    <Compile Include="Models\CelulaViewModel.cs" />
+    <Compile Include="Models\GradeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SugerirViewModel.cs" />

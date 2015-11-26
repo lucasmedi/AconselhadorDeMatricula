@@ -81,6 +81,8 @@ namespace Dominio.Aconselhador
                         CodCred = disciplina.CodCred,
                         Turma = turma.Numero
                     };
+
+                    disciplina.TurmaSelecionada = turma;
                 }
 
                 break;
