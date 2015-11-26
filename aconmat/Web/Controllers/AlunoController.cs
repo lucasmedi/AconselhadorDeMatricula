@@ -30,7 +30,8 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SugerirMatricula(SugerirViewModel viewModel)
         {
-            var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name);
+            var periodos = Periodo.IdentificaPeriodos(viewModel.Restricoes.Split(','));
+            var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name, periodos);
             viewModel.Matricula = aconselhador.GetMatricula();
 
             return View(viewModel);
@@ -44,5 +45,7 @@ namespace Web.Controllers
 
             return RedirectToAction("Index", "Aluno");
         }
+
+        
     }
 }

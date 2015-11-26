@@ -19,6 +19,15 @@ namespace Web.Models
             _restricoes = new List<Periodo>();
         }
 
+        public AconselhadorModel(HttpContextBase httpContext, string matricula, List<Periodo> restricoes)
+        {
+            _httpContext = httpContext;
+            _matricula = matricula;
+
+            _restricoes = restricoes;
+        }
+
+
         public Matricula GetMatricula()
         {
             var leitor = new LeitorCSV(GetFilePath());

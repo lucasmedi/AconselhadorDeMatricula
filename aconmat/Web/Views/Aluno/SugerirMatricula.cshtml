@@ -75,7 +75,7 @@
                     @for (int j = 0; j < grade.GetLength(0); j++)
                     {
                         var val = grade.GetValue(j, i) as Dominio.Aconselhador.Celula;
-                        if (val != null && !val.Bloqueado)
+                        if (val != null)
                         {
                             <td>@(val.Bloqueado ? "Livre" : val.CodCred)</td>
                             escreveLinha = true;
