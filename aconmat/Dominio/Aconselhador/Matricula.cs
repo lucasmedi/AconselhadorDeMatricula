@@ -101,6 +101,50 @@ namespace Dominio.Aconselhador
 
         public Celula[,] GetGrade()
         {
+            var dia = new Dictionary<int, bool>();
+            var horario = new Dictionary<int, bool>();
+
+            for (int i = 0; i < grade.GetLength(0); i++)
+            {
+                var temNoDia = false;
+                for (int j = 0; j < grade.GetLength(1); j++)
+                {
+                    if (grade.GetValue(i, j) != null)
+                    {
+                        temNoDia = true;
+                    }
+                }
+
+                if (temNoDia)
+                    dia.Add(i, true);
+            }
+
+            for (int i = 0; i < grade.GetLength(1); i++)
+            {
+                var temNoHorario = false;
+                for (int j = 0; j < grade.GetLength(0); j++)
+                {
+                    if (grade.GetValue(j, i) != null)
+                    {
+                        temNoHorario = true;
+                    }
+                }
+
+                if (temNoHorario)
+                    horario.Add(i, true);
+            }
+
+            foreach (var diaKey in dia.Keys)
+            {
+                foreach (var horarioKey in horario.Keys)
+                {
+                    if (grade.GetValue(diaKey, horarioKey) == null)
+                    {
+                        grade[diaKey, horarioKey] = new Celula() { Bloqueado = true };
+                    }
+                }
+            }
+
             return grade;
         }
 
