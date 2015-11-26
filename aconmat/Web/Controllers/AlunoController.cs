@@ -30,18 +30,19 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SugerirMatricula(SugerirViewModel viewModel)
         {
-            var filePath = HttpContext.Server.MapPath(string.Format("~/App_Data/{0}.csv", User.Identity.Name));
-
-            var restricoes = new List<Periodo>();
-
-            var leitor = new LeitorCSV(filePath);
-            var creditosCursados = 0;
-            var disciplinasPendentes = leitor.CarregaDisciplinasPendentes(out creditosCursados);
-            var aconselhador = new Aconselhador(disciplinasPendentes, restricoes, creditosCursados);
-
+            var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name);
             viewModel.Matricula = aconselhador.GetMatricula();
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult SalvarSugestao(SugerirViewModel viewModel)
+        {
+            var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name);
+            var matricula = aconselhador.GetMatricula();
+
+            return RedirectToAction("Index", "Aluno");
         }
     }
 }
