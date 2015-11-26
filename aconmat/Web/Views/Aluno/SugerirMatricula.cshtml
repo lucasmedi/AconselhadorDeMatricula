@@ -13,7 +13,11 @@
 
 <h2>Sugerir Matrícula</h2>
 
+<hr />
+
 <div class="row">
+    <p>Ações: </p>
+    @Html.ActionLink("Voltar", "Index", "Aluno", new { @class = "btn btn-default" })
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -32,9 +36,7 @@
     }
 </div>
 
-<br />
 <hr />
-<br />
 
 <div class="container">
     @if (Model.Matricula != null)
