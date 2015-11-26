@@ -12,7 +12,7 @@ namespace Dominio.Persistencia
             {
                 new Aluno { Matricula = "101004026", Nome = "Lucas da Costa Cunha" },
                 new Aluno { Matricula = "131803777", Nome = "Giovanni Batista Carlos" },
-                new Aluno { Matricula = "YYYYYYYYY", Nome = "Julia Freitas" },
+                new Aluno { Matricula = "082001777", Nome = "Julia Freitas" },
                 new Aluno { Matricula = "091003087", Nome = "Ariane Figueiredo" },
                 new Aluno { Matricula = "123456789", Nome = "Dilnei Venturini", IsCoordenador = true }
             };
