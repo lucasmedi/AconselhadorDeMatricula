@@ -11,9 +11,10 @@ namespace Dominio.Persistencia
             var alunos = new List<Aluno>()
             {
                 new Aluno { Matricula = "101004026", Nome = "Lucas da Costa Cunha" },
-                new Aluno { Matricula = "XXXXXXXXX", Nome = "Giovanni Batista Carlos" },
+                new Aluno { Matricula = "131803777", Nome = "Giovanni Batista Carlos" },
                 new Aluno { Matricula = "YYYYYYYYY", Nome = "Julia Freitas" },
-                new Aluno { Matricula = "ZZZZZZZZZ", Nome = "Ariane Freitas" }
+                new Aluno { Matricula = "ZZZZZZZZZ", Nome = "Ariane Figueiredo" },
+                new Aluno { Matricula = "123456789", Nome = "Dilnei Venturini", IsCoordenador = true }
             };
 
             context.Alunos.AddRange(alunos);

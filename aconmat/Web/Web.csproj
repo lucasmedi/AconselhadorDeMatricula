@@ -193,7 +193,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Data\101004026.csv" />
     <Content Include="App_Data\aluno2.csv" />
-    <Content Include="App_Data\aluno1.csv" />
+    <Content Include="App_Data\131803777.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -246,9 +246,7 @@
     <Content Include="Views\Aluno\Index.cshtml" />
     <Content Include="Views\Aluno\SugerirMatricula.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Manager\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

@@ -14,9 +14,10 @@ namespace Dominio.Aconselhador
             _filePath = filePath;
         }
 
-        public List<Disciplina> CarregaDisciplinasPendentes()
+        public List<Disciplina> CarregaDisciplinasPendentes(out int creditosCursados)
         {
             var disciplinasPendentes = new List<Disciplina>();
+            creditosCursados = 0;
 
             var reader = new StreamReader(_filePath);
 
@@ -26,6 +27,14 @@ namespace Dominio.Aconselhador
 
                 if (line.StartsWith("#"))
                 {
+                    continue;
+                }
+
+                if (line.StartsWith("C"))
+                {
+                    var disc = line.Split(';');
+                    var ind = disc[1].Split('-');
+                    creditosCursados += int.Parse(ind[1]);
                     continue;
                 }
 

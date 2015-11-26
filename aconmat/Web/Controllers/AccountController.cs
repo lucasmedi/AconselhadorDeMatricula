@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Dominio.Persistencia;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -14,6 +15,8 @@ namespace Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private AconmatContext ctx = new AconmatContext();
 
         public AccountController()
         {
@@ -160,7 +163,7 @@ namespace Web.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToLocal(string.Empty);
                 }
                 AddErrors(result);
             }
@@ -447,7 +450,15 @@ namespace Web.Controllers
                 return Redirect(returnUrl);
             }
 
-            return RedirectToAction("Index", "Usuario");
+            var controller = "Home";
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = ctx.Alunos.Where(o => o.Matricula == User.Identity.Name).FirstOrDefault();
+                controller = (user.IsCoordenador ? "Coordenador" : "Aluno");
+            }
+
+            return RedirectToAction("Index", controller);
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

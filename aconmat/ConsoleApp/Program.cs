@@ -11,10 +11,11 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             //var filePath = @"C:\Projetos\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes.csv";
-            var filePath = @"C:\Projetos\GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes2.csv";
+            var filePath = @"C:\Users\lucas-cunha\Desktop\Meus Documentos\Projetos GitHub\AconselhadorDeMatricula\aconmat\ConsoleApp\files\disciplinasPendentes2.csv";
 
             var leitor = new LeitorCSV(filePath);
-            var disciplinasPendentes = leitor.CarregaDisciplinasPendentes();
+            var creditosCursados = 0;
+            var disciplinasPendentes = leitor.CarregaDisciplinasPendentes(out creditosCursados);
 
             var restricoes = new List<Periodo>();
             restricoes.Add(new Periodo(Horario.LM, DiaSemana.Segunda));
@@ -22,7 +23,7 @@ namespace ConsoleApp
             restricoes.Add(new Periodo(Horario.LM, DiaSemana.Quarta));
             restricoes.Add(new Periodo(Horario.LM, DiaSemana.Quinta));
 
-            var aconselhador = new Aconselhador(disciplinasPendentes, restricoes, 80);
+            var aconselhador = new Aconselhador(disciplinasPendentes, restricoes, creditosCursados);
             var matricula = aconselhador.GetMatricula();
             var grade = matricula.GetGrade();
 

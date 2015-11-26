@@ -16,6 +16,8 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var aluno = ctx.Alunos.ToList().FirstOrDefault(o => o.Matricula == User.Identity.Name);
+            if (aluno.IsCoordenador)
+                return RedirectToAction("Index", "Coordenador");
 
             return View(aluno);
         }
@@ -33,8 +35,9 @@ namespace Web.Controllers
             var restricoes = new List<Periodo>();
 
             var leitor = new LeitorCSV(filePath);
-            var disciplinasPendentes = leitor.CarregaDisciplinasPendentes();
-            var aconselhador = new Aconselhador(disciplinasPendentes, restricoes, 80);
+            var creditosCursados = 0;
+            var disciplinasPendentes = leitor.CarregaDisciplinasPendentes(out creditosCursados);
+            var aconselhador = new Aconselhador(disciplinasPendentes, restricoes, creditosCursados);
 
             viewModel.Matricula = aconselhador.GetMatricula();
 
