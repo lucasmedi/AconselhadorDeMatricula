@@ -29,7 +29,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SugerirMatricula(SugerirViewModel viewModel)
         {
-            var periodos = Periodo.IdentificaPeriodos(viewModel.Restricoes.Split(','));
+            var periodos = Dominio.Aconselhador.Periodo.IdentificaPeriodos(viewModel.Restricoes.Split(','));
             var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name, periodos);
             viewModel.Matricula = aconselhador.GetMatricula();
 
