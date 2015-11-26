@@ -451,10 +451,9 @@ namespace Web.Controllers
             }
 
             var controller = "Home";
-
-            if (User.Identity.IsAuthenticated)
+            var user = ctx.Alunos.Where(o => o.Matricula == User.Identity.Name).FirstOrDefault();
+            if (user != null)
             {
-                var user = ctx.Alunos.Where(o => o.Matricula == User.Identity.Name).FirstOrDefault();
                 controller = (user.IsCoordenador ? "Coordenador" : "Aluno");
             }
 

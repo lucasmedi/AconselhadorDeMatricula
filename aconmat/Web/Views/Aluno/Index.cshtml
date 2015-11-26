@@ -1,4 +1,4 @@
-﻿@model Dominio.Modelos.Aluno
+﻿@model Web.Models.AlunoViewModel
 
 @{
     ViewBag.Title = "Página Inicial";
@@ -8,9 +8,25 @@
 
 <div class="row">
     <h2>Seleção de Matrícula</h2>
-    <h3>Aluno: @Model.Nome</h3>
+    <h3>Aluno: @Model.GetAluno().Nome</h3>
 </div>
 
+<hr />
+
 <div class="row">
-    @Html.ActionLink("Sugerir Matrícula", "SugerirMatricula")
+    <p>Ações: </p>
+    @Html.ActionLink("Sugerir Matrícula", "SugerirMatricula", null, new { @class = "btn btn-default" })
+    @if (Model.TemGrade)
+    {
+        @Html.ActionLink("Excluir Sugestão", "ExcluirSugestao", null, new { @class = "btn btn-default" })
+    }
+</div>
+
+<hr />
+
+<div class="row">
+    @if (Model.TemGrade)
+    {
+        Html.RenderPartial("_GradePartial", Model.GetGrade());
+    }
 </div>

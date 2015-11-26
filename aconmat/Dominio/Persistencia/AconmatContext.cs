@@ -26,5 +26,7 @@ namespace Dominio.Persistencia
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
         public virtual DbSet<Aluno> Alunos { get; set; }
+
+        public virtual DbSet<GradeMatricula> Matriculas { get; set; }
     }
 }

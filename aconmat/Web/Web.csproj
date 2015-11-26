@@ -177,6 +177,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AconselhadorModel.cs" />
+    <Compile Include="Models\AlunoViewModel.cs" />
+    <Compile Include="Models\CelulaViewModel.cs" />
+    <Compile Include="Models\GradeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SugerirViewModel.cs" />
@@ -247,6 +250,7 @@
     <Content Include="Views\Coordenador\Index.cshtml" />
     <Content Include="Views\Aluno\Index.cshtml" />
     <Content Include="Views\Aluno\SugerirMatricula.cshtml" />
+    <Content Include="Views\Shared\_GradePartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

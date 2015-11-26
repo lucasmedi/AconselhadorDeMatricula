@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
-using Dominio.Aconselhador;
+using Dominio.Modelos;
 using Dominio.Persistencia;
 using Web.Models;
 
@@ -19,7 +18,7 @@ namespace Web.Controllers
             if (aluno.IsCoordenador)
                 return RedirectToAction("Index", "Coordenador");
 
-            return View(aluno);
+            return View(new AlunoViewModel(aluno));
         }
 
         public ActionResult SugerirMatricula()
@@ -42,6 +41,36 @@ namespace Web.Controllers
         {
             var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name);
             var matricula = aconselhador.GetMatricula();
+
+            var aluno = ctx.Alunos.FirstOrDefault(o => o.Matricula == User.Identity.Name);
+            if (aluno != null)
+            {
+                aluno.Grade = new GradeMatricula();
+
+                var disciplinas = matricula.GetDisciplinas();
+                foreach (var disciplina in disciplinas)
+                {
+                    var cadeira = new Cadeira
+                    {
+                        CodCred = disciplina.CodCred,
+                        Nome = disciplina.Nome
+                    };
+
+                    if (disciplina.TurmaSelecionada != null)
+                    {
+                        cadeira.Turma = disciplina.TurmaSelecionada.Numero;
+                        cadeira.Periodos = disciplina.TurmaSelecionada.Periodos.Select(o => new Periodo()
+                        {
+                            DiaSemana = o.DiaSemana,
+                            Horario = o.Horario
+                        }).ToList();
+                    }
+
+                    aluno.Grade.Disciplinas.Add(cadeira);
+                }
+
+                ctx.SaveChanges();
+            }
 
             return RedirectToAction("Index", "Aluno");
         }

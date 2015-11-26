@@ -1,0 +1,67 @@
+﻿@model Web.Models.GradeViewModel
+
+@{
+    var grade = Model.GetGrade();
+    var escreveLinha = false;
+}
+
+<h3>
+    Grade de Disciplinas
+</h3>
+<table class="table">
+    <thead>
+        <tr>
+            @for (int i = 0; i < grade.GetLength(0); i++)
+            {
+                var temValor = false;
+                for (int j = 0; j < grade.GetLength(1); j++)
+                {
+                    var val = grade.GetValue(i, j) as Web.Models.CelulaViewModel;
+                    if (val != null)
+                    {
+                        temValor = true;
+                    }
+                }
+
+                if (temValor)
+                {
+                    <th>@Dominio.Enums.EnumHelper.GetEnumDescription((Dominio.Enums.DiaSemana)i + 2)</th>
+                }
+            }
+            <th>Horário</th>
+        </tr>
+    </thead>
+
+    @for (int i = 0; i < grade.GetLength(1); i++)
+            {
+        <tr>
+            @for (int j = 0; j < grade.GetLength(0); j++)
+            {
+                var val = grade.GetValue(j, i) as Web.Models.CelulaViewModel;
+                if (val != null && !val.Bloqueado)
+                {
+                    <td>@(val.Bloqueado ? "Livre" : val.CodCred)</td>
+                    escreveLinha = true;
+                }
+            }
+
+            @if (escreveLinha)
+            {
+                <th>@Dominio.Enums.EnumHelper.GetEnumDescription((Dominio.Enums.Horario)i + 1)</th>
+                escreveLinha = false;
+            }
+        </tr>
+    }
+</table>
+
+<br />
+
+<h3>
+    Relação de Disciplinas
+</h3>
+<ul class="list-group">
+    @foreach (var item in Model.GetCadeiras())
+            {
+        <li class="list-group-item @(item.Turma == 0 ? "li-danger" : "")">@string.Format("{0} - {1}", item.CodCred, item.Nome)</li>
+    }
+</ul>
