@@ -250,6 +250,7 @@
     <Content Include="Views\Coordenador\Index.cshtml" />
     <Content Include="Views\Aluno\Index.cshtml" />
     <Content Include="Views\Aluno\SugerirMatricula.cshtml" />
+    <Content Include="Views\Shared\_GradePartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
