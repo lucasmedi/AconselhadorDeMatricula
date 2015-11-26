@@ -81,6 +81,11 @@ namespace Dominio.Aconselhador
                     }
                 }
 
+                if (!disciplina.Turmas.Any())
+                {
+                    disciplina.Especial = true;
+                }
+
                 disciplinasPendentes.Add(disciplina);
             }
 

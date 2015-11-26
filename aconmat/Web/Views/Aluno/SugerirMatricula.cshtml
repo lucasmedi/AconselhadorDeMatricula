@@ -4,6 +4,13 @@
     ViewBag.Title = "Sugerir Matrícula";
 }
 
+<style type="text/css">
+    .li-danger {
+        background-color: #d9534f !important;
+        color: #ffffff !important;
+    }
+</style>
+
 <h2>Sugerir Matrícula</h2>
 
 <div class="row">
@@ -34,29 +41,36 @@
     {
         var grade = Model.Matricula.GetGrade();
         var escreveLinha = false;
-        var escreveCabecalho = true;
 
         <h3>
             Grade de Disciplinas
         </h3>
         <table class="table">
+            <thead>
+                <tr>
+                    @for (int i = 0; i < grade.GetLength(0); i++)
+                    {
+                        var temValor = false;
+                        for (int j = 0; j < grade.GetLength(1); j++)
+                        {
+                            var val = grade.GetValue(i, j) as Dominio.Aconselhador.Celula;
+                            if (val != null)
+                            {
+                                temValor = true;
+                            }
+                        }
+
+                        if (temValor)
+                        {
+                            <th>@Dominio.Enums.EnumHelper.GetEnumDescription((Dominio.Enums.DiaSemana)i + 2)</th>
+                        }
+                    }
+                    <th>Horário</th>
+                </tr>
+            </thead>
+
             @for (int i = 0; i < grade.GetLength(1); i++)
             {
-                if (escreveCabecalho)
-                {
-                    <thead>
-                        <tr>
-                            <th>Segunda</th>
-                            <th>Terça</th>
-                            <th>Quarta</th>
-                            <th>Quinta</th>
-                            <th>Sexta</th>
-                            <th>Horário</th>
-                        </tr>
-                    </thead>
-                    escreveCabecalho = false;
-                }
-
                 <tr>
                     @for (int j = 0; j < grade.GetLength(0); j++)
                     {
@@ -85,7 +99,7 @@
         <ul class="list-group">
             @foreach (var item in Model.Matricula.GetDisciplinas())
             {
-                <li class="list-group-item">@string.Format("{0}-{1:00} - {2}", item.CodCred, item.Creditos, item.Nome)</li>
+                <li class="list-group-item @(item.Especial ? "li-danger" : "")">@string.Format("{0}-{1:00} - {2}", item.CodCred, item.Creditos, item.Nome)</li>
             }
         </ul>
     }
