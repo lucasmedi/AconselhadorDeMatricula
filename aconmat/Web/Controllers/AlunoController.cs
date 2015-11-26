@@ -3,6 +3,8 @@ using System.Web.Mvc;
 using Dominio.Modelos;
 using Dominio.Persistencia;
 using Web.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Web.Controllers
 {
@@ -29,7 +31,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult SugerirMatricula(SugerirViewModel viewModel)
         {
-            var periodos = Dominio.Aconselhador.Periodo.IdentificaPeriodos(viewModel.Restricoes.Split(','));
+            var periodos = String.IsNullOrEmpty(viewModel.Restricoes) ? new List<Dominio.Aconselhador.Periodo>() :  Dominio.Aconselhador.Periodo.IdentificaPeriodos(viewModel.Restricoes.Split(','));
             var aconselhador = new AconselhadorModel(HttpContext, User.Identity.Name, periodos);
             viewModel.Matricula = aconselhador.GetMatricula();
 
